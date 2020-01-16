@@ -108,6 +108,22 @@ def make_melons(melon_types):
     """Returns a list of Melon objects."""
 
     # Fill in the rest
+    melons = []
+
+    melons_by_id = make_melon_type_lookup(make_melon_types())
+    melon1 = Melon(melons_by_id['yw'], 8, 7, 2, 'Sheila')
+    melon2 = Melon(melons_by_id['yw'], 3, 4, 2, 'Sheila')
+    melon3 = Melon(melons_by_id['yw'], 9, 8, 3, 'Sheila')
+    melon4 = Melon(melons_by_id['cas'], 10, 6, 35, 'Sheila')
+    melon5 = Melon(melons_by_id['cren'], 8, 9, 35, 'Michael')
+    melon6 = Melon(melons_by_id['cren'], 8, 2, 35, 'Michael')
+    melon7 = Melon(melons_by_id['cren'], 2, 3, 4, 'Michael')
+    melon8 = Melon(melons_by_id['musk'], 6, 7, 4, 'Michael')
+    melon9 = Melon(melons_by_id['yw'], 7, 10, 3, 'Sheila')
+    melons.extend([melon1, melon2, melon3, melon4, melon5, melon6, melon7, melon8, melon9])
+
+    return melons
+
 
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
