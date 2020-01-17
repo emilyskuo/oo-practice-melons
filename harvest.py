@@ -104,7 +104,7 @@ class Melon(object):
             return False
 
 
-def make_melons(melon_types):
+def make_melons():
     """Returns a list of Melon objects."""
 
     # Fill in the rest
@@ -125,10 +125,37 @@ def make_melons(melon_types):
     return melons
 
 
+def make_melons_from_file(file_name):
+    melons = []
+
+    melon_info = open(file_name)
+    melons_by_id = make_melon_type_lookup(make_melon_types())
+
+    for melon_stats in melon_info:
+        melon_stats = melon_stats.rstrip()
+        melon_stats = melon_stats.split()
+        code = melon_stats[5]
+        shape = int(melon_stats[1])
+        color = int(melon_stats[3])
+        field = int(melon_stats[-1])
+        harvester = melon_stats[8]
+        melon = Melon(melons_by_id[code], shape, color, field, harvester)
+        melons.append(melon)
+
+    melon_info.close()
+
+    return melons
+
+
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
 
     # Fill in the rest 
+    for melon in melons:
+        if melon.is_sellable():
+            print(f"Harvested by {melon.harvester} from Field {melon.field} (CAN BE SOLD)")
+        else:
+            print(f"Harvested by {melon.harvester} from Field {melon.field} (NOT SELLABLE)")
 
 
-
+get_sellability_report(make_melons_from_file("harvest_log.txt"))
